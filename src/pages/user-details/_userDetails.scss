@@ -1,0 +1,65 @@
+@use './../../styles/variables' as *;
+
+.user-details {
+  background-color: $color-white;
+  padding: $spacing-6;
+  .user-details-sections {
+    .details-section {
+      margin-bottom: $spacing-8;
+      border-bottom: 1px solid #eff1f5;
+      padding-bottom: $spacing-8;
+
+      h3 {
+        font-size: $font-size-base;
+        font-weight: $font-weight-medium;
+        margin-bottom: $spacing-8;
+        color: $color-text-dark;
+      }
+
+      .details-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-8;
+
+        .details-item {
+          width: $width-30;
+          @media (max-width: 1024px) {
+            width: $width-25;
+          }
+
+          @media (max-width: 768px) {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: $width-100;
+          }
+
+          .label {
+            font-size: $font-size-xs;
+            color: $color-text-medium;
+            text-transform: uppercase;
+            font-weight: $font-weight-regular;
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            @media (max-width: 768px) {
+              font-size: $font-size-sm;
+            }
+          }
+
+          .value {
+            font-size: $font-size-base;
+            color: $color-text-dark;
+            font-weight: $font-weight-medium;
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            @media (max-width: 768px) {
+              font-size: $font-size-sm;
+            }
+          }
+        }
+      }
+    }
+  }
+}

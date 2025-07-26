@@ -1,0 +1,66 @@
+@use './variables' as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-family-base;
+  background-color: $color-background;
+  color: $color-text-light;
+  line-height: 1.5;
+}
+$font-family-base: 'Work Sans', sans-serif;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: $font-weight-medium;
+  color: $color-text-dark;
+}
+
+// p {
+//   margin-bottom: 1em;
+// }
+
+label {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-medium;
+  margin-bottom: $spacing-1;
+  font-weight: $font-weight-medium;
+}
+
+button {
+ 
+
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 14px 10px;
+  margin-bottom: $spacing-3;
+  border: 1px solid #dcdcdc;
+  border-radius: $border-radius-md;
+  font-size: 14px;
+  background: $color-white;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: #39cdcc;
+    box-shadow: 0 0 0 2px rgba(57, 205, 204, 0.2);
+  }
+}

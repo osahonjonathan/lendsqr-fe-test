@@ -1,0 +1,134 @@
+@use './../../styles/variables' as *;
+.loginContainer {
+  font-family: 'Nunito Sans', sans-serif;
+  display: flex;
+
+  width: 100%;
+
+  min-height: 100vh;
+  background-color: $color-white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 100vh;
+  }
+  .illustrationSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: $spacing-6;
+    background: linear-gradient(to right, #ffffff 0%, #fdfdfd 60%);
+
+    .logo {
+      width: 180px;
+      margin-bottom: $spacing-9;
+    }
+
+    .illustrationImage {
+      max-width: 80%;
+      height: auto;
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .formSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: $color-white;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .section-content {
+      padding: 60px;
+    }
+    .welcomeHeading {
+      font-size: 40px;
+      font-weight: $font-weight-bold;
+      color: $color-text-dark;
+      margin-bottom: $spacing-2;
+      line-height: 1;
+
+      @media (max-width: 768px) {
+        font-size: 48px;
+      }
+    }
+
+    .enterDetailsText {
+      font-size: 20px;
+      color: $color-text-light;
+      margin-bottom: $spacing-9;
+      font-weight: $font-weight-regular;
+
+      @media (max-width: 768px) {
+        font-size: $font-size-base;
+        margin-bottom: $spacing-8;
+      }
+    }
+
+    .loginForm {
+      width: 100%;
+      max-width: 400px;
+
+      @media (max-width: 768px) {
+        max-width: 100%;
+      }
+
+      .inputGroup {
+        position: relative;
+        margin-bottom: $spacing-6;
+
+        input {
+          padding-right: $spacing-9;
+        }
+
+        .showHideToggle {
+          position: absolute;
+          right: $spacing-4;
+          top: 50%;
+          transform: translateY(-50%);
+          color: $color-secondary-teal;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-semi-bold;
+          cursor: pointer;
+          text-transform: uppercase;
+        }
+      }
+
+      .forgotPasswordLink {
+        display: block;
+        margin-top: $spacing-2;
+        margin-bottom: $spacing-8;
+        color: $color-secondary-teal;
+        text-decoration: none;
+        font-weight: $font-weight-semi-bold;
+        font-size: $font-size-sm;
+        text-transform: uppercase;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .loginButton {
+        padding: $spacing-3;
+        font-size: $font-size-base;
+        width: 100%;
+
+        text-transform: uppercase;
+      }
+    }
+  }
+}

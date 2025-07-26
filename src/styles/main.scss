@@ -1,0 +1,73 @@
+@use './variables' as *;
+@use './base';
+@use './../../src/component/header/header';
+@use './../../src/component/sidebar/sidebar';
+@use './../pages/user/user.scss';
+@use './../pages/user/userTable';
+@use './../component/shared/paginator/paginator';
+@use './../component/shared/card/card';
+@use './../pages/login/login';
+@use './../pages/user-details/userDetailsPage';
+@use './../pages/user-details/userDetails';
+@use './../pages/user-details/userTab';
+@use './animation';
+
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    // margin-left: 250px;
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
+
+  .page-content {
+    flex: 1;
+    padding: $spacing-6;
+    transition: opacity 0.3s;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &.overlay-active {
+      @media (max-width: 768px) {
+        opacity: 0.4;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.btn-outline {
+  background-color: $color-white;
+  border: 1px solid $color-text-dark;
+   padding: $spacing-3;
+}
+
+.teal-btn {
+  background: #39cdcc;
+  color: white;
+  border: none;
+   padding: $spacing-3;
+  // width: 100%;
+  &:hover {
+    background: #2bbcbf;
+  }
+}

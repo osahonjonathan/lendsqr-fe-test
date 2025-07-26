@@ -1,0 +1,11 @@
+@use './../../styles/variables' as *;
+
+.user-page {
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-6;
+  gap: 40px;
+  h5 {
+    font-size: $font-size-lg;
+  }
+}

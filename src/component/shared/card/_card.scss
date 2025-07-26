@@ -1,0 +1,55 @@
+@use './../../../styles/variables' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: $color-white;
+  border-radius: $border-radius-md;
+  box-shadow: $card-shadow;
+  padding: $spacing-7;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-size: $font-size-sm;
+
+    color: $color-text-medium;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  &__value {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semi-bold;
+    color: $color-text-dark;
+    margin: $spacing-0;
+  }
+
+  &--purple .card__icon {
+    background: rgba($color-purple, 0.1);
+    color: $color-purple;
+  }
+  &--blue .card__icon {
+    background: rgba($color-blue, 0.1);
+    color: $color-blue;
+  }
+  &--orange .card__icon {
+    background: rgba($color-orange, 0.1);
+    color: $color-orange;
+  }
+  &--red .card__icon {
+    background: rgba($color-red, 0.1);
+    color: $color-red;
+  }
+}

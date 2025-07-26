@@ -1,0 +1,135 @@
+@use './../../styles/variables' as *;
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-3;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-5 $spacing-8;
+  background-color: $color-white;
+  box-shadow: 0 2px 4px $color-shadow-light;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  .hamburger {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+
+  .logo {
+    width: 150px;
+    @media (max-width: 768px) {
+      width: 90px;
+    }
+  }
+}
+
+.app-header__search-container {
+  display: flex;
+
+  flex-grow: 1;
+  max-width: 400px;
+  height: 45px;
+
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  border: 1px solid $color-border-light;
+}
+
+.app-header__search-input {
+  flex-grow: 1;
+  padding: $spacing-3 $spacing-4;
+  border: none;
+  margin-top: 10px;
+
+  font-size: $font-size-sm;
+  color: $color-text-dark;
+
+  &::placeholder {
+    color: $color-text-light;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.app-header__search-button {
+  padding: $spacing-3;
+  width: 60px;
+  background-color: $color-secondary-teal;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease-in-out;
+
+
+}
+
+.app-header__nav-items {
+  display: flex;
+  align-items: center;
+  gap: $spacing-5;
+}
+
+.app-header__nav-link {
+  font-size: $font-size-sm;
+  color: $color-text-dark;
+
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: $color-secondary-teal;
+  }
+}
+
+.app-header__notification-icon {
+  width: 24px;
+  height: 24px;
+  color: $color-text-light;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: $color-text-dark;
+  }
+}
+
+.app-header__profile {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  cursor: pointer;
+}
+
+.app-header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: $border-radius-full;
+  object-fit: cover;
+  border: 2px solid $color-secondary-teal;
+}
+
+.app-header__username {
+  font-size: $font-size-base;
+  font-weight: 600;
+  color: $color-text-dark;
+}
+
+.app-header__dropdown-arrow {
+  width: 16px;
+  height: 16px;
+  color: $color-text-light;
+}

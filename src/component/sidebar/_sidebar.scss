@@ -1,0 +1,81 @@
+@use './../../styles/variables' as *;
+
+.sidebar {
+  width: 250px;
+  background-color: $color-white;
+  padding: $spacing-4;
+
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+
+  gap: $spacing-2;
+  font-size: $font-size-sm;
+
+  transform: translateX(0);
+  transition: none;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    font-weight: 500;
+    color: $color-text-light;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    &.active {
+      background: #f0f4ff;
+      color: #1a73e8;
+
+      .sidebar__label {
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__group {
+    margin-top: $spacing-4;
+
+    &-title {
+      font-size: 12px;
+      color: $color-text-dark;
+      margin: 0 0 6px 16px;
+      text-transform: uppercase;
+    }
+  }
+
+  .close-btn {
+    display: none;
+  }
+
+  .logout-icon-container {
+    display: flex;
+    gap: $spacing-5;
+    margin-left: $spacing-7;
+    margin-top: $spacing-6;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    &.open {
+      transform: translateX(0);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .close-btn {
+      display: block;
+      margin-bottom: 1rem;
+    }
+  }
+}
