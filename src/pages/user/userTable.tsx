@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Filter } from 'lucide-react';
+
 import { useAppContext } from '../../context/appContext';
 
 import { MoreVertical } from 'lucide-react';
@@ -22,6 +22,8 @@ const UserTable = () => {
   const navigate = useNavigate();
 
   const {
+    isLoading,
+    error,
     showFilter,
     filterValues,
     handleClearFilters,
@@ -52,8 +54,8 @@ const UserTable = () => {
     navigate(`/app/users/${userId}`);
   };
 
-  // if (isLoading) return <div>Loading...</div>;
-  // if (error) return <div>Something went wrong. Please try again later</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Something went wrong. Please try again later</div>;
 
   return (
     <div>
@@ -112,7 +114,7 @@ const UserTable = () => {
                   <td>{user.user_name}</td>
                   <td>{user.email}</td>
                   <td>{user.phone_number}</td>
-                  <td>{formatDateTime(user.date)}</td>
+                  <td>{formatDateTime(user.date_joined)}</td>
                   <td>
                     <span className={getStatusClass(user.status)}>
                       {user.status}

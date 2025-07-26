@@ -5,7 +5,7 @@ export interface UserResponse {
   organisation: string;
   user_name: string;
   email: string;
-  date: string;
+  date_joined: string;
   phone_number: string;
   dateJoined: string;
   status: UserStatus;

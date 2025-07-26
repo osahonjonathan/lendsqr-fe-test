@@ -3,17 +3,16 @@ import type { UserResponse } from '../../model/user';
 import { fetchData } from '../../api/dataApi';
 import { useMemo, useState } from 'react';
 import { useAppContext } from '../../context/appContext';
-import { userData } from '../../data/userDetails';
 
 export const useUserTableData = () => {
-  // const {
-  //   data: userData = [],
-  //   isLoading,
-  //   error,
-  // } = useQuery<UserResponse[]>({
-  //   queryKey: ['users'],
-  //   queryFn: fetchData,
-  // });
+  const {
+    data: userData = [],
+    isLoading,
+    error,
+  } = useQuery<UserResponse[]>({
+    queryKey: ['users'],
+    queryFn: fetchData,
+  });
   const { searchQuery, setSearchQuery, setSearchTerm } = useAppContext();
   const [showFilter, setShowFilter] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -93,7 +92,8 @@ export const useUserTableData = () => {
 
   return {
     userData,
-
+    isLoading,
+    error,
     showFilter,
     filteredUsers,
     handleClearFilters,
