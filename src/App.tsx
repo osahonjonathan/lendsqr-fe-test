@@ -2,17 +2,27 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import MainLayout from './layouts/mainLayout';
 
-import Login from './pages/login/login';
-import './styles/main.scss';
 import { AppProvider } from './context/appProvider';
-import UserDetailsPage from './pages/user-details/userDetailsPage';
 
-import UsersDashboardPage from './pages/user/user';
+import { lazy, Suspense } from 'react';
+
+import './styles/main.scss';
+
+const LoginPage = lazy(() => import('./pages/login/login'));
+const UserDetailsPage = lazy(
+  () => import('./pages/user-details/userDetailsPage')
+);
+const UsersDashboardPage = lazy(() => import('./pages/user/user'));
+const NotFoundPage = lazy(() => import('./pages/not-found/notFoundPage'));
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Login />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <LoginPage />
+      </Suspense>
+    ),
   },
   {
     path: '/app',
@@ -21,16 +31,35 @@ const router = createBrowserRouter([
       {
         path: 'users',
         element: (
-          <UsersDashboardPage pageTitle="Users" isInteractive={true} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <UsersDashboardPage pageTitle="Users" isInteractive={true} />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'users/:id',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <UserDetailsPage />
+          </Suspense>
         ),
       },
       {
         path: 'dashboard',
         element: (
-          <UsersDashboardPage pageTitle="Dashboard" isInteractive={false} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <UsersDashboardPage pageTitle="Dashboard" isInteractive={false} />
+          </Suspense>
         ),
       },
-      { path: 'users/:id', element: <UserDetailsPage /> },
+      {
+        path: '*',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <NotFoundPage />
+          </Suspense>
+        ),
+      },
     ],
   },
 ]);

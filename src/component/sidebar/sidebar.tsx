@@ -3,6 +3,7 @@ import SidebarItem from './sidebarItem';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/appContext';
 import LogOutIcon from '../../assets/sign-out.svg';
+import { X } from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -26,7 +27,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
       <span className="close-btn" onClick={toggleSidebar}>
-        ✖
+        <X size={24} color="#333" />
       </span>
       {sidebarItems.map((section, index) =>
         'standalone' in section ? (
@@ -36,6 +37,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
             label={section.label}
             path={section.path}
             isActive={isPathActive(location.pathname, section.path)}
+            onClick={() => toggleSidebar()}
           />
         ) : (
           <div key={index} className="sidebar__group">
@@ -47,6 +49,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
                 label={item.label}
                 path={item.path}
                 isActive={isPathActive(location.pathname, item.path)}
+                onClick={() => toggleSidebar()}
               />
             ))}
           </div>

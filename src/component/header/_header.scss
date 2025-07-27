@@ -3,6 +3,7 @@
 .app-header {
   display: flex;
   flex-wrap: wrap;
+  height: 90px;
   gap: $spacing-3;
   justify-content: space-between;
   align-items: center;
@@ -12,6 +13,10 @@
   position: sticky;
   top: 0;
   z-index: 20;
+
+  @media (max-width: 768px) {
+    height: 180px;
+  }
 
   .hamburger {
     display: none;
@@ -73,8 +78,6 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s ease-in-out;
-
-
 }
 
 .app-header__nav-items {

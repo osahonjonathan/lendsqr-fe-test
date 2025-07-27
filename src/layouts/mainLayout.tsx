@@ -16,16 +16,14 @@ const MainLayout = () => {
   const nodeRef = useRef(null);
   return (
     <div className="main-layout">
-   
+      <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
       <Header toggleSidebar={() => setSidebarOpen((prev) => !prev)} />
 
       <div className="main-content ">
-        <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
         <section
           className={`page-content ${sidebarOpen ? 'overlay-active' : ''}`}
         >
           <TransitionGroup component={null}>
-            
             <CSSTransition
               key={location.key}
               nodeRef={nodeRef}

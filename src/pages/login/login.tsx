@@ -5,7 +5,7 @@ import loginIllustration from '../../assets/illustratorLogo.svg';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/appContext';
 
-export default function LoginForm() {
+export default function LoginPage() {
   const navigate = useNavigate();
   const { setUserData } = useAppContext();
   const [formUser, setFormUser] = useState({

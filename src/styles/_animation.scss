@@ -1,7 +1,16 @@
+.page-slide-enter,
+.page-slide-exit {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
 .page-slide-enter {
   opacity: 0;
   transform: translateX(50px);
 }
+
 .page-slide-enter-active {
   opacity: 1;
   transform: translateX(0);
@@ -12,6 +21,7 @@
   opacity: 1;
   transform: translateX(0);
 }
+
 .page-slide-exit-active {
   opacity: 0;
   transform: translateX(-50px);
@@ -20,14 +30,10 @@
 
 .page-content-wrapper {
   position: relative;
-
   width: 100%;
-  height: 100%;
+  height: auto;
+  overflow: visible;
 }
 .page-content-wrapper > div {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  position: relative;
 }

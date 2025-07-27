@@ -19,12 +19,11 @@
 
   .main-content {
     display: flex;
-    flex: 1;
-    overflow: hidden;
-    position: relative;
-    // margin-left: 250px;
+    margin-left: 283px;
+    
+
     @media (max-width: 768px) {
-      margin-left: 0;
+      margin-left: 0px;
     }
   }
 
@@ -33,7 +32,7 @@
     padding: $spacing-6;
     transition: opacity 0.3s;
     position: relative;
-    overflow-y: auto;
+    
     overflow-x: hidden;
 
     &.overlay-active {
@@ -58,15 +57,15 @@
 .btn-outline {
   background-color: $color-white;
   border: 1px solid $color-text-dark;
-   padding: $spacing-3;
+  padding: $spacing-3;
 }
 
 .teal-btn {
   background: #39cdcc;
   color: white;
   border: none;
-   padding: $spacing-3;
-  // width: 100%;
+  padding: $spacing-3;
+
   &:hover {
     background: #2bbcbf;
   }

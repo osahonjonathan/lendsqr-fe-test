@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import UserTabs from './userTab';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import type { IUserDetails } from '../../model/user';
 import UserDetails from './userDetails';
+import profileIcon from '../../assets/user-profile.svg';
 
 const UserDetailsPage = () => {
+  const { id } = useParams();
+
+  console.log('UserDetailsPage rendered with ID:', id);
   const [details, setDetails] = useState<IUserDetails | null>(null);
 
   useEffect(() => {
@@ -42,7 +46,9 @@ const UserDetailsPage = () => {
 
       <div className="profile-card">
         <div className="user-summary">
-          <div className="avatar"></div>
+          <div className="avatar">
+            <img src={profileIcon} alt="user" className="profile-img" />
+          </div>
           <div className="info">
             <h3>John Doe</h3>
             <p>ACC-0001 / Access Bank</p>
