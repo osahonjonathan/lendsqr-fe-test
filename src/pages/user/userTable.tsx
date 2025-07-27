@@ -1,10 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MoreVertical } from 'lucide-react';
 
 import { useAppContext } from '../../context/appContext';
-
-import { MoreVertical } from 'lucide-react';
 import filterIcon from '../../assets/filter.svg';
-
 import { type UserResponse } from '../../model/user';
 import Paginator from '../../component/shared/paginator/paginator';
 import { formatDateTime } from '../../utils/formatDate';
@@ -13,10 +12,27 @@ import { filterFields } from '../../data/filterConfig';
 import UserTableFilter from '../../component/filter/filter';
 import UserMenuDropdown from './userMenuDropdown';
 import { useUserTableData } from '../../component/hooks/useUserTableData';
-import { useNavigate } from 'react-router-dom';
 import { userDetailsData } from '../../data/userDetails';
 
-const UserTable = () => {
+interface Column {
+  label: string;
+  key: string;
+}
+
+const columns: Column[] = [
+  { label: 'ORGANIZATION', key: 'organisation' },
+  { label: 'USERNAME', key: 'user_name' },
+  { label: 'EMAIL', key: 'email' },
+  { label: 'PHONE NUMBER', key: 'phone_number' },
+  { label: 'DATE JOINED', key: 'date_joined' },
+  { label: 'STATUS', key: 'status' },
+];
+
+interface UserTableProps {
+  isInteractive: boolean;
+}
+
+const UserTable = ({ isInteractive }: UserTableProps) => {
   const { handleBlacklistUser, handleActivateUser } = useAppContext();
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -49,9 +65,20 @@ const UserTable = () => {
     handleActivateUser(userId);
     setOpenMenuId(null);
   };
+
   const handleViewDetails = (userId: string) => {
     localStorage.setItem('userDetails', JSON.stringify(userDetailsData));
     navigate(`/app/users/${userId}`);
+  };
+
+  const handleToggleFilter = () => {
+    if (!isInteractive) return;
+    toggleFilter();
+  };
+
+  const handleMenuClick = (userId: string) => {
+    if (!isInteractive) return;
+    setOpenMenuId(openMenuId === userId ? null : userId);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -64,67 +91,54 @@ const UserTable = () => {
           Reset
         </button>
       </div>
+
       <div className="user-table-container">
         <table>
           <thead>
             <tr>
-              <th onClick={toggleFilter}>
-                <div className="header-filter">
-                  <span>ORGANIZATION</span>
-                  <img src={filterIcon} alt="filter" className="filter-icon" />
-                </div>
-              </th>
-              <th onClick={toggleFilter}>
-                <div className="header-filter">
-                  <span>USERNAME</span>
-                  <img src={filterIcon} alt="filter" className="filter-icon" />
-                </div>
-              </th>
-              <th onClick={toggleFilter}>
-                <div className="header-filter">
-                  <span>EMAIL</span>
-                  <img src={filterIcon} alt="filter" className="filter-icon" />
-                </div>
-              </th>
-              <th onClick={toggleFilter}>
-                <div className="header-filter">
-                  <span>PHONE NUMBER</span>
-                  <img src={filterIcon} alt="filter" className="filter-icon" />
-                </div>
-              </th>
-              <th onClick={toggleFilter}>
-                <div className="header-filter">
-                  <span>DATE JOINED</span>
-                  <img src={filterIcon} alt="filter" className="filter-icon" />
-                </div>
-              </th>
-              <th onClick={toggleFilter}>
-                <div className="header-filter">
-                  <span>STATUS</span>
-                  <img src={filterIcon} alt="filter" className="filter-icon" />
-                </div>
-              </th>
+              {columns.map((col) => (
+                <th key={col.key} onClick={handleToggleFilter}>
+                  <div className="header-filter">
+                    <span>{col.label}</span>
+                    <img
+                      src={filterIcon}
+                      alt="filter"
+                      className="filter-icon"
+                    />
+                  </div>
+                </th>
+              ))}
+              <th></th>
             </tr>
           </thead>
+
           <tbody>
             {currentUsers.length > 0 ? (
               currentUsers.map((user: UserResponse) => (
                 <tr key={user.id}>
-                  <td>{user.organisation}</td>
-                  <td>{user.user_name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phone_number}</td>
-                  <td>{formatDateTime(user.date_joined)}</td>
-                  <td>
-                    <span className={getStatusClass(user.status)}>
-                      {user.status}
-                    </span>
-                  </td>
+                  {columns.map((col) => {
+                    let cellData = user[col.key as keyof UserResponse];
+
+                    if (col.key === 'date_joined') {
+                      cellData = formatDateTime(cellData);
+                    }
+
+                    if (col.key === 'status') {
+                      return (
+                        <td key={col.key}>
+                          <span className={getStatusClass(user.status)}>
+                            {user.status}
+                          </span>
+                        </td>
+                      );
+                    }
+
+                    return <td key={col.key}>{cellData}</td>;
+                  })}
+
                   <td className="menu-cell">
                     <button
-                      onClick={() =>
-                        setOpenMenuId(openMenuId === user.id ? null : user.id)
-                      }
+                      onClick={() => handleMenuClick(user.id)}
                       className="menu-btn"
                     >
                       <MoreVertical size={16} />
@@ -142,7 +156,7 @@ const UserTable = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={6} className="no-data">
+                <td colSpan={columns.length + 1} className="no-data">
                   No matching records found
                 </td>
               </tr>
