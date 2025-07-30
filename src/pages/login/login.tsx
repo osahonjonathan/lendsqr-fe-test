@@ -26,7 +26,7 @@ export default function LoginPage() {
 
     setUserData(userData);
 
-    navigate('/app/dashboard');
+    navigate('/app/users');
   };
 
   return (
